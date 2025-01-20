@@ -12,8 +12,14 @@ namespace Yahtzee_WFA
     public class Die
     {
 
+        /// <summary>
+        /// A picture box to hold the image of the die
+        /// </summary>
         private PictureBox _pictureBox;
 
+        /// <summary>
+        /// Dimensions of the dice in the sprite png
+        /// </summary>
         private static int dieWidth = 55;
         private static int dieHeight = dieWidth;
         private static int spriteYOffset = 28;
@@ -21,7 +27,7 @@ namespace Yahtzee_WFA
 
 
         /// <summary>
-        /// Map that tracks the location of die on the sprite
+        /// Map that tracks the location of die on the sprite png
         /// </summary>
         private static readonly Dictionary<byte, Rectangle> DieFaceMap = new Dictionary<byte, Rectangle>
         {
@@ -33,20 +39,18 @@ namespace Yahtzee_WFA
             { 6, new Rectangle(spriteXOffset + dieWidth * 5, spriteYOffset, dieWidth, dieHeight) }
         };
 
-        // ctor ← shorthand for constructor
 
         /// <summary>
+        /// A constructor for a die
         /// Creates the die and rolls it to start with 
         /// a random number
         /// </summary>
         public Die(GameBoard board, PictureBox targetDieDisplay)
         {
             _pictureBox = targetDieDisplay;
-            Roll();
-            //InitializePictureBox(board, targetDieDisplay);
+            Roll(); // Roll the dice right away
         }
 
-        // prop ← shorthand for intellisense
 
         /// <summary>
         /// The current face up value of the die
@@ -108,8 +112,5 @@ namespace Yahtzee_WFA
             _pictureBox.Invalidate(); // Force the PictureBox to repaint
 
         }
-
-
     }
-
 }
