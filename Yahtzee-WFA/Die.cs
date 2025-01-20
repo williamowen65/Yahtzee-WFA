@@ -12,6 +12,8 @@ namespace Yahtzee_WFA
     public class Die
     {
 
+        private PictureBox _pictureBox;
+
         private static int dieWidth = 55;
         private static int dieHeight = dieWidth;
         private static int spriteYOffset = 28;
@@ -39,8 +41,9 @@ namespace Yahtzee_WFA
         /// </summary>
         public Die(GameBoard board, PictureBox targetDieDisplay)
         {
+            _pictureBox = targetDieDisplay;
             Roll();
-            InitializePictureBox(board, targetDieDisplay);
+            //InitializePictureBox(board, targetDieDisplay);
         }
 
         // prop ← shorthand for intellisense
@@ -74,23 +77,19 @@ namespace Yahtzee_WFA
         {
             // Generate random number
             byte newValue = (byte)_random.Next(1, _random.Next(1, 7));
+
+
             // Set to face value
             FaceValue = newValue;
 
-            //setDieImage();
+            //MessageBox.Show($"Die value {FaceValue}");
+
+            setDieImage();
 
             return FaceValue;
         }
 
-        PictureBox _pictureBox;
-        private void InitializePictureBox(GameBoard board, PictureBox targetDieDisplay)
-        {
-
-            _pictureBox = targetDieDisplay;
-
-            setDieImage();
-        }
-
+     
         public void setDieImage() {
 
             _pictureBox.Paint += (sender, e) =>
@@ -105,9 +104,11 @@ namespace Yahtzee_WFA
                     e.Graphics.DrawImage(spriteSheet, destRect, sourceRect, GraphicsUnit.Pixel);
                 }
             };
+
+            _pictureBox.Invalidate(); // Force the PictureBox to repaint
+
         }
 
-        public int MyProperty { get; set; }
 
     }
 
